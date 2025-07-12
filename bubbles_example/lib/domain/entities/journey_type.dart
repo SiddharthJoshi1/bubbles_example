@@ -2,7 +2,7 @@
 ///
 /// Each enum value corresponds to a distinct part of the user's flow
 /// through the delivery process.
-enum JourneyType {
+enum Bubbles {
   /// The initial stage where items are selected and reviewed.
   basket,
 

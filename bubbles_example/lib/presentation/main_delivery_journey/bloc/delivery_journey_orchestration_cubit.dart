@@ -4,21 +4,21 @@ import 'delivery_journey_orchestration_state.dart';
 
 class DeliveryJourneyOrchestrationCubit
     extends Cubit<DeliveryJourneyOrchestrationState> {
-  late JourneyType journeyType;
+  late Bubbles bubbleType;
 
-  final List<JourneyType> journeyOrder = [
-    JourneyType.basket,
-    JourneyType.deliverydetails,
-    JourneyType.payment,
-    JourneyType.completed,
+  final List<Bubbles> bubbleOrder = [
+    Bubbles.basket,
+    Bubbles.deliverydetails,
+    Bubbles.payment,
+    Bubbles.completed,
   ];
 
-  final Map<JourneyType, DeliveryJourneyOrchestrationState> journeyStates = {
-    JourneyType.basket: DeliveryJourneyOrchestrationStateBasket(),
-    JourneyType.deliverydetails:
+  final Map<Bubbles, DeliveryJourneyOrchestrationState> bubbleStatesMapping = {
+    Bubbles.basket: DeliveryJourneyOrchestrationStateBasket(),
+    Bubbles.deliverydetails:
         DeliveryJourneyOrchestrationStateDeliveryDetails(),
-    JourneyType.payment: DeliveryJourneyOrchestrationStatePayment(),
-    JourneyType.completed: DeliveryJourneyOrchestrationStateSuccess(),
+    Bubbles.payment: DeliveryJourneyOrchestrationStatePayment(),
+    Bubbles.completed: DeliveryJourneyOrchestrationStateSuccess(),
   };
 
   DeliveryJourneyOrchestrationCubit()
@@ -28,26 +28,26 @@ class DeliveryJourneyOrchestrationCubit
   }
 
   void startJourney() {
-    journeyType = journeyOrder.first;
-    emit(journeyStates[journeyType]!);
+    bubbleType = bubbleOrder.first;
+    emit(bubbleStatesMapping[bubbleType]!);
   }
 
   void goToNextJourneyStep() {
-    if (journeyOrder.indexOf(journeyType) == journeyOrder.length - 1) {
+    if (bubbleOrder.indexOf(bubbleType) == bubbleOrder.length - 1) {
       handleFatalError();
       return;
     }
-    journeyType = journeyOrder[journeyOrder.indexOf(journeyType) + 1];
-    emit(journeyStates[journeyType]!);
+    bubbleType = bubbleOrder[bubbleOrder.indexOf(bubbleType) + 1];
+    emit(bubbleStatesMapping[bubbleType]!);
   }
 
   void goToPreviousJourneyStep() {
-    if (journeyOrder.indexOf(journeyType) == 0) {
+    if (bubbleOrder.indexOf(bubbleType) == 0) {
       handleFatalError();
       return;
     }
-    journeyType = journeyOrder[journeyOrder.indexOf(journeyType) - 1];
-    emit(journeyStates[journeyType]!);
+    bubbleType = bubbleOrder[bubbleOrder.indexOf(bubbleType) - 1];
+    emit(bubbleStatesMapping[bubbleType]!);
   }
 
   void handleFatalError() {
