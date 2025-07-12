@@ -1,3 +1,4 @@
+import 'package:bubbles_example/domain/entities/journey_type.dart';
 import 'package:equatable/equatable.dart';
 
 // Abstract base class

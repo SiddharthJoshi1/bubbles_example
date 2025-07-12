@@ -1,3 +1,4 @@
+import 'package:bubbles_example/domain/entities/journey_type.dart';
 import 'package:bubbles_example/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +38,7 @@ class _PaymentForm extends StatelessWidget {
             ),
           );
           // This bubble is done. Tell the orchestrator to complete the journey.
-          context.read<DeliveryJourneyOrchestrationCubit>().completeJourney();
+          context.read<DeliveryJourneyOrchestrationCubit>().goToNextJourneyStep();
         } else if (state is PaymentFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -96,7 +97,7 @@ class _PaymentForm extends StatelessWidget {
                           // Go back to the previous step in the journey
                           context
                               .read<DeliveryJourneyOrchestrationCubit>()
-                              .goToDeliveryDetails();
+                              .goToPreviousJourneyStep();
                         },
                 child: const Text('Back to Delivery Details'),
               ),

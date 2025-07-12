@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../domain/entities/journey_type.dart';
 import '../../../injection_container.dart';
 import '../../main_delivery_journey/bloc/delivery_journey_orchestration_cubit.dart';
 import '../bloc/delivery_details_cubit.dart';
@@ -55,8 +56,10 @@ class _DeliveryDetailsFormState extends State<_DeliveryDetailsForm> {
               backgroundColor: Colors.green,
             ),
           );
-          // Tell the orchestrator to proceed to the payment bubble.
-          context.read<DeliveryJourneyOrchestrationCubit>().goToPayment();
+          // Tell the orchestrator to proceed to the next bubble.
+          context.read<DeliveryJourneyOrchestrationCubit>().goToNextJourneyStep(
+           
+          );
         } else if (state is DeliveryDetailsError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -116,9 +119,9 @@ class _DeliveryDetailsFormState extends State<_DeliveryDetailsForm> {
                         ? null
                         : () {
                           // This button also talks to the orchestrator to go backwards.
-                          context
+                         context
                               .read<DeliveryJourneyOrchestrationCubit>()
-                              .backToBasket();
+                              .goToPreviousJourneyStep();
                         },
                 child: const Text('Back to Basket'),
               ),

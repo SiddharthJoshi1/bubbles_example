@@ -1,8 +1,26 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../domain/entities/journey_type.dart';
 import 'delivery_journey_orchestration_state.dart';
 
 class DeliveryJourneyOrchestrationCubit
     extends Cubit<DeliveryJourneyOrchestrationState> {
+  late JourneyType journeyType;
+
+  final List<JourneyType> journeyOrder = [
+    JourneyType.basket,
+    JourneyType.deliverydetails,
+    JourneyType.payment,
+    JourneyType.completed,
+  ];
+
+  final Map<JourneyType, DeliveryJourneyOrchestrationState> journeyStates = {
+    JourneyType.basket: DeliveryJourneyOrchestrationStateBasket(),
+    JourneyType.deliverydetails:
+        DeliveryJourneyOrchestrationStateDeliveryDetails(),
+    JourneyType.payment: DeliveryJourneyOrchestrationStatePayment(),
+    JourneyType.completed: DeliveryJourneyOrchestrationStateSuccess(),
+  };
+
   DeliveryJourneyOrchestrationCubit()
     : super(DeliveryJourneyOrchestrationStateInitial()) {
     // When the orchestrator is created, kick off the journey
@@ -10,33 +28,30 @@ class DeliveryJourneyOrchestrationCubit
   }
 
   void startJourney() {
-    // The first step in our journey is the basket.
-    emit(DeliveryJourneyOrchestrationStateBasket());
+    journeyType = journeyOrder.first;
+    emit(journeyStates[journeyType]!);
   }
 
-  void goToDeliveryDetails() {
-    print("ORCHESTRATOR: Moving to Delivery Details");
-    emit(DeliveryJourneyOrchestrationStateDeliveryDetails());
+  void goToNextJourneyStep() {
+    if (journeyOrder.indexOf(journeyType) == journeyOrder.length - 1) {
+      handleFatalError();
+      return;
+    }
+    journeyType = journeyOrder[journeyOrder.indexOf(journeyType) + 1];
+    emit(journeyStates[journeyType]!);
   }
 
-  void goToPayment() {
-    print("ORCHESTRATOR: Moving to Payment");
-    emit(DeliveryJourneyOrchestrationStatePayment());
-  }
-
-  void completeJourney() {
-    print("ORCHESTRATOR: Journey complete!");
-    emit(DeliveryJourneyOrchestrationStateSuccess());
+  void goToPreviousJourneyStep() {
+    if (journeyOrder.indexOf(journeyType) == 0) {
+      handleFatalError();
+      return;
+    }
+    journeyType = journeyOrder[journeyOrder.indexOf(journeyType) - 1];
+    emit(journeyStates[journeyType]!);
   }
 
   void handleFatalError() {
     print("ORCHESTRATOR: A fatal error occurred.");
     emit(DeliveryJourneyOrchestrationStateFatalFailure());
-  }
-
-  // A method to go back a step, useful for user navigation
-  void backToBasket() {
-    print("ORCHESTRATOR: Going back to Basket");
-    emit(DeliveryJourneyOrchestrationStateBasket());
   }
 }

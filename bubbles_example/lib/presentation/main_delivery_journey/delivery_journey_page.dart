@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:bubbles_example/domain/entities/journey_type.dart';
 import 'package:bubbles_example/injection_container.dart';
 import 'package:bubbles_example/presentation/payment/widget/payment_widget.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../delivery_details/bloc/delivery_details_cubit.dart';
 
-import '../delivery_details/view/delivery_details_confirmation_widget.dart' show DeliveryDetailsConfirmationView;
+import '../delivery_details/view/delivery_details_confirmation_widget.dart'
+    show DeliveryDetailsConfirmationView;
 import 'bloc/delivery_journey_orchestration_cubit.dart';
 import 'bloc/delivery_journey_orchestration_state.dart';
 
@@ -43,7 +47,7 @@ class DeliveryJourneyPage extends StatelessWidget {
                             () =>
                                 context
                                     .read<DeliveryJourneyOrchestrationCubit>()
-                                    .goToDeliveryDetails(),
+                                    .goToNextJourneyStep(),
                         child: const Text("Proceed to Delivery Details"),
                       ),
                     ],
@@ -56,7 +60,7 @@ class DeliveryJourneyPage extends StatelessWidget {
 
               case DeliveryJourneyOrchestrationStatePayment():
                 // Placeholder for the payment bubble
-                  return const PaymentWidget();
+                return const PaymentWidget();
 
               case DeliveryJourneyOrchestrationStateSuccess():
                 return const Center(child: Text("🎉 Order Confirmed! 🎉"));
