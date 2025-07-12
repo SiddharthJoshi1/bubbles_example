@@ -57,9 +57,7 @@ class _DeliveryDetailsFormState extends State<_DeliveryDetailsForm> {
             ),
           );
           // Tell the orchestrator to proceed to the next bubble.
-          context.read<DeliveryJourneyOrchestrationCubit>().goToNextJourneyStep(
-           
-          );
+          context.read<DeliveryJourneyOrchestrationCubit>().goToNextJourneyStep();
         } else if (state is DeliveryDetailsError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
