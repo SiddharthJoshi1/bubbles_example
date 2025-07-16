@@ -1,4 +1,4 @@
-# bubbles_example
+# Bubbles - Example
 
 A Flutter project demonstrating the **"Bubbles" architecture pattern** for managing complex, multi-step user flows. This repository is the companion source code for the article **Bubbles: Breaking Down Complex Journeys With Single-Responsibility Orchestrators**.
 
