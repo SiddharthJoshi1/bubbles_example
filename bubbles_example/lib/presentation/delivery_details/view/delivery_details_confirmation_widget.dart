@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/entities/journey_type.dart';
 import '../../../injection_container.dart';
 import '../../main_delivery_journey/bloc/delivery_journey_orchestration_cubit.dart';
 import '../bloc/delivery_details_cubit.dart';

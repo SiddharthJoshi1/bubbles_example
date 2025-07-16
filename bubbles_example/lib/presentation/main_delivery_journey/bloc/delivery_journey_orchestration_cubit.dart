@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/journey_type.dart';
 import 'delivery_journey_orchestration_state.dart';
@@ -51,7 +52,7 @@ class DeliveryJourneyOrchestrationCubit
   }
 
   void handleFatalError() {
-    print("ORCHESTRATOR: A fatal error occurred.");
+    debugPrint("ORCHESTRATOR: A fatal error occurred.");
     emit(DeliveryJourneyOrchestrationStateFatalFailure());
   }
 }

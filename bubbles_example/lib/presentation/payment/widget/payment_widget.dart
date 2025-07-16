@@ -1,4 +1,3 @@
-import 'package:bubbles_example/domain/entities/journey_type.dart';
 import 'package:bubbles_example/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

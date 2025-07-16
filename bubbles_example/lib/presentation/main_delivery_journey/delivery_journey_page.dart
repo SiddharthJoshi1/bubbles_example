@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:bubbles_example/domain/entities/journey_type.dart';
 import 'package:bubbles_example/injection_container.dart';
 import 'package:bubbles_example/presentation/payment/widget/payment_widget.dart';
 import 'package:flutter/material.dart';
