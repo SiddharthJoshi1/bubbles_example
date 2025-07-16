@@ -1,10 +1,9 @@
-# bubbles_example
+# Bubbles: Breaking Down Complex Journeys With Single-Responsibility Orchestrators
 
 A Flutter project demonstrating the **"Bubbles" architecture pattern** for managing complex, multi-step user flows. This repository is the companion source code for the article **Bubbles: Breaking Down Complex Journeys With Single-Responsibility Orchestrators**.
 
 This pattern is designed to decouple individual steps of a journey (like a checkout process) into self-contained modules, orchestrated by a central manager.
 
----
 
 ## 🫧 The "Bubbles" Pattern
 
