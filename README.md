@@ -82,4 +82,4 @@ To run this project locally:
 
 This repository provides the source code for the companion article. You can find the detailed walkthrough and explanation here:
 
-**[Link to your article on Medium, dev.to, or your personal blog]**
+**[Link to the Article!!!](https://tinybigtheory.substack.com/p/bubbles-breaking-down-complex-journeys)**
